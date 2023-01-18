@@ -1,0 +1,11 @@
+{
+  "name": "API-DevHouse",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/NickBritoDev/API-DevHouse.git",
+  "author": "Brito <101473345+NickBritoDev@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
