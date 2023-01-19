@@ -8,10 +8,17 @@ class SessionController{
         // const email = req.body.email; // requisição feita sem descontruir 
         const {email} = req.body; //descontruição do javascript
 
-        //criação de novo usuario no banco de dados na tabela de usuarios
-        let user = await User.create({email});
+        //busca por um usuario com o mesmo email
+        let user = await User.findOne({email});
 
-        //retorna o email do novo usuario
+        //verifica a  existencia de um usuario com o mesmo email
+        if(!user){
+            //se não houver nenhum usuario registrado com o memsmo email ele cria um novo usuario
+            user = await User.create({email});
+        }
+
+
+        //retorna o email do usuario
         return res.json(user);
     }
 }
