@@ -2,6 +2,7 @@
 // const routes = require('./routes') //sucrase e assim obter uma melhor performance na aplicação
 import express from "express";
 import mongoose from "mongoose";
+import path from 'path'
 import routes from './routes';
 class App {
     constructor(){
@@ -22,6 +23,11 @@ class App {
     }
 
     middlewares(){
+        //criando rota estatica atravez do path passando pelo middlewares
+        this.server.use(
+            '/files',
+            express.static(path.resolve(__dirname, '..', 'uploads'))
+        )
         //middleware pra exprecificar o uso de json
         this.server.use(express.json());
     }

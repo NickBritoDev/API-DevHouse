@@ -11,7 +11,17 @@ const HouseSchema = new Schema({
         type: Schema.Types.ObjectId, //retorna o id do usuario do model de user
         ref: 'User',
     }
+}, {
+    toJSON: {
+    //permissão de virtual url:  true
+    virtuals: true
+    }
 });
+
+//URL de acesso da imagem
+HouseSchema.virtual('thumbnail_url').get(function () {
+    return `http://localhost:3333/files/${this.thumbnail}`
+})
 
 //exportando house e sua respectiva schema
 export default model('House', HouseSchema);
