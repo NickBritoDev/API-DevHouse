@@ -21,6 +21,8 @@ routes.get('/houses', HouseController.index)
 //4ºrota: de edição de dados referentes ao imovel (com upload de imagem)
 routes.put('/houses/:house_id', upload.single('thumbnail'), HouseController.update)
 
+//5ºrota: rota de destruição do imovel
+routes.delete('/houses', HouseController.destroy)
 
 //exportação da rota
 export default routes;

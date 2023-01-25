@@ -43,8 +43,8 @@ class HouseController {
         const houses = await House.findById(house_id) //busca o id do imovel
 
         //compara se o id do usuario é o mesmo id do usuario que fez o anuncio do imovel
-        if(String(user._id) !== String(houses.user)){
-            return res.status(401).json({message: 'Não autorizado'})
+        if (String(user._id) !== String(houses.user)) {
+            return res.status(401).json({ message: 'Não autorizado' })
         }
 
         //itens que podem ser editados
@@ -58,7 +58,26 @@ class HouseController {
         })
 
 
-        return res.status(200).json({message: 'Imovel editado com sucesso'})
+        return res.status(200).json({ message: 'Imovel editado com sucesso' })
+    }
+
+    //faz a destruição do imovel
+    async destroy(req, res) {
+        const { house_id } = req.body //busca o id referente ao imovel
+        const { user_id } = req.headers //busca o id referente ao usuario
+
+        const user = await User.findById(user_id) //busca o id do usuario logado
+        const houses = await House.findById(house_id) //busca o id do imovel
+
+
+         //compara se o id do usuario é o mesmo id do usuario que fez o anuncio do imovel
+         if (String(user._id) !== String(houses.user)) {
+            return res.status(401).json({ message: 'Não autorizado' })
+        }
+
+        await House.findByIdAndDelete({_id: house_id})
+
+        return res.json({ message: 'Excluida com sucesso' })
     }
 }
 
