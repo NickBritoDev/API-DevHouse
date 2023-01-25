@@ -12,11 +12,15 @@ const upload = multer(UploadConfig)
 //1ºrota: rota de criação de acesso (login)
 routes.post('/sessions', SessionController.store );
 
-//2ºrota: rota de criação de anuncio (detalhes do imovel)
+//2ºrota: rota de criação de anuncio (detalhes do imovel com upload de imagem)
 routes.post('/houses', upload.single('thumbnail') ,HouseController.store)
 
 //3ºrota: rota de para alterar o status do imovel
 routes.get('/houses', HouseController.index)
+
+//4ºrota: de edição de dados referentes ao imovel (com upload de imagem)
+routes.put('/houses/:houseID', upload.single('thumbnail'), HouseController.update)
+
 
 //exportação da rota
 export default routes;
