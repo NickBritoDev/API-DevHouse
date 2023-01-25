@@ -15,5 +15,8 @@ routes.post('/sessions', SessionController.store );
 //2ºrota: rota de criação de anuncio (detalhes do imovel)
 routes.post('/houses', upload.single('thumbnail') ,HouseController.store)
 
+//3ºrota: rota de para alterar o status do imovel
+routes.get('/houses', HouseController.index)
+
 //exportação da rota
 export default routes;
