@@ -19,7 +19,7 @@ routes.post('/houses', upload.single('thumbnail') ,HouseController.store)
 routes.get('/houses', HouseController.index)
 
 //4ºrota: de edição de dados referentes ao imovel (com upload de imagem)
-routes.put('/houses/:houseID', upload.single('thumbnail'), HouseController.update)
+routes.put('/houses/:house_id', upload.single('thumbnail'), HouseController.update)
 
 
 //exportação da rota

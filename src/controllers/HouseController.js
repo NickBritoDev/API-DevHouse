@@ -1,4 +1,5 @@
 import House from '../models/House'
+import User from '../models/User'
 
 class HouseController {
 
@@ -33,12 +34,21 @@ class HouseController {
 
     //faz a alteração dos dados do imovel
     async update(req, res) {
-        const { houseID } = req.params //captura o id do imovel
+        const { house_id } = req.params //captura o id do imovel
         const { filename } = req.file //captura de arquivo
         const { description, price, location, status } = req.body //captura do array com os dados do imovel
         const { user_id } = req.headers //captura do id do usuario que fizer o anuncio
 
-        const houses = await House.updateOne({ _id: houseID }, {
+        const user = await User.findById(user_id) //busca o id do usuario logado
+        const houses = await House.findById(house_id) //busca o id do imovel
+
+        //compara se o id do usuario é o mesmo id do usuario que fez o anuncio do imovel
+        if(String(user._id) !== String(houses.user)){
+            return res.status(401).json({message: 'Não autorizado'})
+        }
+
+        //itens que podem ser editados
+        await House.updateOne({ _id: house_id }, {
             user: user_id,
             thumbnail: filename,
             description,
@@ -48,7 +58,7 @@ class HouseController {
         })
 
 
-        return res.send('Edição realizada com sucesso')
+        return res.status(200).json({message: 'Imovel editado com sucesso'})
     }
 }
 
