@@ -32,5 +32,11 @@ routes.get('/dashboard', DashboardController.show)
 //7ºrota: rota de locação do imovel
 routes.post('/houses/:house_id/reserve', ReserveController.store)
 
+//8ªrota: rota de listagem de reservas
+routes.get('/reserves', ReserveController.index)
+
+//9ºrota: rota de cancelamento de listagem
+routes.delete('/reserves/cancelamento', ReserveController.destroy)
+
 //exportação da rota
 export default routes;
