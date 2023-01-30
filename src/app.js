@@ -2,6 +2,7 @@
 // const routes = require('./routes') //sucrase e assim obter uma melhor performance na aplicação
 import express from "express";
 import mongoose from "mongoose";
+import cors from "cors"
 import path from 'path'
 import routes from './routes';
 class App {
@@ -23,6 +24,9 @@ class App {
     }
 
     middlewares(){
+        //controle de requisição/consumo da api atraves do cors
+        this.server.use(cors())
+
         //criando rota estatica atravez do path passando pelo middlewares
         this.server.use(
             '/files',

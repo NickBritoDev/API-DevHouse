@@ -5,6 +5,7 @@ import UploadConfig from "./config/Upload";
 import HouseController from "./controllers/HouseController";
 import SessionController from "./controllers/SessionController";
 import DashboardController from "./controllers/DashboardController";
+import ReserveController from "./controllers/ReserveController";
 
 const routes = new Router();
 //inicialização do multer
@@ -27,6 +28,9 @@ routes.delete('/houses', HouseController.destroy)
 
 //6ºrota: rota de listagem de imoveis
 routes.get('/dashboard', DashboardController.show)
+
+//7ºrota: rota de locação do imovel
+routes.post('/houses/:house_id/reserve', ReserveController.store)
 
 //exportação da rota
 export default routes;
